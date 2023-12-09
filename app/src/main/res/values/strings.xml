@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">weatherApp</string>
+    <string name="enter_zipcode">Enter zipcode</string>
+    <string name="zipcode_entering_program">Zipcode Entering Program!</string>
+    <string name="enterbutton">enterButton</string>
 </resources>
