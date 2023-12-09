@@ -3,4 +3,8 @@
     <string name="enter_zipcode">Enter zipcode</string>
     <string name="zipcode_entering_program">Zipcode Entering Program!</string>
     <string name="enterbutton">enterButton</string>
+    <string name="temperature_text">Temperature Text</string>
+    <string name="_70_0">70.0</string>
+    <string name="partly_cloudy">Partly Cloudy</string>
+    <string name = "forecast_clicked_format">Forecast: %1$.2f %2$s</string>
 </resources>

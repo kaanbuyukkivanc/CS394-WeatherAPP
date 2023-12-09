@@ -11,10 +11,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.weatherapp.Adapter.DailyAdapter
+import com.example.weatherapp.data.ForecastRepository
+import com.example.weatherapp.data.Weather
 
 
 class MainActivity : ComponentActivity() {
+
+    private val forecastRepository = ForecastRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,12 +37,25 @@ class MainActivity : ComponentActivity() {
                 Toast.makeText(this, "Enter a valid zipcode number", Toast.LENGTH_SHORT).show()
             }
             else{
-                Toast.makeText(this, zipcode, Toast.LENGTH_SHORT).show()
+                forecastRepository.loadForecast(zipcode)
             }
 
         }
 
+        val forecastListRecyclerView : RecyclerView = findViewById(R.id.forecastList_recyclerView)
+        forecastListRecyclerView.layoutManager = LinearLayoutManager(this)
 
+
+        val dailyAdapter = DailyAdapter(){
+            val msg = getString(R.string.forecast_clicked_format,it.temp,it.description)
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+        }
+        forecastListRecyclerView.adapter = dailyAdapter
+
+        val weeklyForecastObserver = Observer<List<Weather>>{forecastItems ->
+            dailyAdapter.submitList(forecastItems)
+        }
+        forecastRepository.weeklyForecast.observe(this, weeklyForecastObserver)
     }
 
     override fun onStart(){
