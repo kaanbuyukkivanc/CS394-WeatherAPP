@@ -6,5 +6,8 @@
     <string name="temperature_text">Temperature Text</string>
     <string name="_70_0">70.0</string>
     <string name="partly_cloudy">Partly Cloudy</string>
-    <string name = "forecast_clicked_format">Forecast: %1$.2f %2$s</string>
+    <string name="forecast_clicked_format">Forecast: %1$.2f %2$s</string>
+    <string name="title_activity_weather_datails">WeatherDatailsActivity</string>
+    <string name="title_activity_weather_details">WeatherDetailsActivity</string>
+    <string name="forecast_details">Forecast Details</string>
 </resources>
