@@ -10,4 +10,6 @@
     <string name="title_activity_weather_datails">WeatherDatailsActivity</string>
     <string name="title_activity_weather_details">WeatherDetailsActivity</string>
     <string name="forecast_details">Forecast Details</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

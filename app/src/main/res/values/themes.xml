@@ -2,7 +2,7 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- other style attributes -->
+
     </style>
 
     <style name="Theme.WeatherApp" parent="android:Theme.Material.Light.NoActionBar" />

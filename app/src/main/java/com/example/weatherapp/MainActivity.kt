@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -23,11 +24,13 @@ import com.example.weatherapp.Adapter.DailyAdapter
 import com.example.weatherapp.data.ForecastRepository
 import com.example.weatherapp.data.Weather
 import com.example.weatherapp.details.WeatherDetailsActivity
+import com.example.weatherapp.forecasting.TodayWeatherFragment
+import com.example.weatherapp.location.LocationSelectionFragment
 
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity(), AppNavigator{
 
-    private val forecastRepository = ForecastRepository()
+
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,36 +38,10 @@ class MainActivity : ComponentActivity() {
 
         tempDisplaySettingManager = TempDisplaySettingManager(this)
 
-        val zipcodeEditText : EditText = findViewById(R.id.zipcodeEditText)
-        val enterButton : Button = findViewById(R.id.enterButton)
-
-        enterButton.setOnClickListener {
-
-            val zipcode : String = zipcodeEditText.text.toString()
-
-            if(zipcode.length != 5){
-                Toast.makeText(this, "Enter a valid zipcode number", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                forecastRepository.loadForecast(zipcode)
-            }
-
-        }
-
-        val forecastListRecyclerView : RecyclerView = findViewById(R.id.forecastList_recyclerView)
-        forecastListRecyclerView.layoutManager = LinearLayoutManager(this)
-
-
-        val dailyAdapter = DailyAdapter(tempDisplaySettingManager){
-            showForecastDetails(it)
-        }
-        forecastListRecyclerView.adapter = dailyAdapter
-
-        val weeklyForecastObserver = Observer<List<Weather>>{forecastItems ->
-            dailyAdapter.submitList(forecastItems)
-        }
-        forecastRepository.weeklyForecast.observe(this, weeklyForecastObserver)
-
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragmentContainer, LocationSelectionFragment())
+            .commit()
 
     }
 
@@ -85,13 +62,21 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
-    private fun showForecastDetails(forecast : Weather){
-        val forecastDetailsIntent = Intent(this, WeatherDetailsActivity::class.java)
-        forecastDetailsIntent.putExtra("key_temp", forecast.temp)
-        forecastDetailsIntent.putExtra("key_description", forecast.description)
-        startActivity(forecastDetailsIntent)
+    override fun navigateWeatherOfToday(zipcode: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, TodayWeatherFragment.newInstance(zipcode))
+            .commit()
     }
+
+    override fun navigateLocationSelection(){
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragmentContainer, LocationSelectionFragment())
+            .commit()
+
+    }
+
 
     override fun onStart(){
         super.onStart()
