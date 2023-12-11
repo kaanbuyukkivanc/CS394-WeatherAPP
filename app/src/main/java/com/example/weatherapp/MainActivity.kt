@@ -11,10 +11,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import com.example.weatherapp.data.Weather
 import com.example.weatherapp.forecasting.TodayWeatherFragmentDirections
 import androidx.navigation.ui.setupWithNavController
-import com.example.weatherapp.location.LocationSelectionFragmentDirections
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
-class MainActivity : AppCompatActivity(), AppNavigator{
+class MainActivity : AppCompatActivity() {
 
 
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), AppNavigator{
         val appBarConfig = AppBarConfiguration(navController.graph)
 
         findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar).setupWithNavController(navController,appBarConfig)
+        findViewById<BottomNavigationView>(R.id.bottomNavigationView).setupWithNavController(navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -45,22 +46,6 @@ class MainActivity : AppCompatActivity(), AppNavigator{
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun navigateWeatherOfToday(zipcode: String) {
-        val action = LocationSelectionFragmentDirections.actionLocationSelectionFragmentToTodayWeatherFragment()
-        findNavController(R.id.nav_host_fragment).navigate(action)
-    }
-
-    override fun navigateLocationSelection(){
-        val action = TodayWeatherFragmentDirections.actionTodayWeatherFragmentToLocationSelectionFragment()
-        findNavController(R.id.nav_host_fragment).navigate(action)
-
-    }
-
-    override fun navigateToDetails(forecast: Weather) {
-        val action = TodayWeatherFragmentDirections.actionTodayWeatherFragmentToWeatherDetailsFragment(forecast.temp,forecast.description)
-        findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
 
