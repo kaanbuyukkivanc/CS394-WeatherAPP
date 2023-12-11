@@ -1,31 +1,17 @@
 package com.example.weatherapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.weatherapp.Adapter.DailyAdapter
-import com.example.weatherapp.data.ForecastRepository
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.weatherapp.data.Weather
-import com.example.weatherapp.details.WeatherDetailsActivity
-import com.example.weatherapp.forecasting.TodayWeatherFragment
-import com.example.weatherapp.location.LocationSelectionFragment
+import com.example.weatherapp.forecasting.TodayWeatherFragmentDirections
+import androidx.navigation.ui.setupWithNavController
+import com.example.weatherapp.location.LocationSelectionFragmentDirections
 
 
 class MainActivity : AppCompatActivity(), AppNavigator{
@@ -38,11 +24,10 @@ class MainActivity : AppCompatActivity(), AppNavigator{
 
         tempDisplaySettingManager = TempDisplaySettingManager(this)
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(R.id.fragmentContainer, LocationSelectionFragment())
-            .commit()
+        val navController = findNavController(R.id.nav_host_fragment)
+        val appBarConfig = AppBarConfiguration(navController.graph)
 
+        findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar).setupWithNavController(navController,appBarConfig)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -63,18 +48,19 @@ class MainActivity : AppCompatActivity(), AppNavigator{
     }
 
     override fun navigateWeatherOfToday(zipcode: String) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, TodayWeatherFragment.newInstance(zipcode))
-            .commit()
+        val action = LocationSelectionFragmentDirections.actionLocationSelectionFragmentToTodayWeatherFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
     override fun navigateLocationSelection(){
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.fragmentContainer, LocationSelectionFragment())
-            .commit()
+        val action = TodayWeatherFragmentDirections.actionTodayWeatherFragmentToLocationSelectionFragment()
+        findNavController(R.id.nav_host_fragment).navigate(action)
 
+    }
+
+    override fun navigateToDetails(forecast: Weather) {
+        val action = TodayWeatherFragmentDirections.actionTodayWeatherFragmentToWeatherDetailsFragment(forecast.temp,forecast.description)
+        findNavController(R.id.nav_host_fragment).navigate(action)
     }
 
 

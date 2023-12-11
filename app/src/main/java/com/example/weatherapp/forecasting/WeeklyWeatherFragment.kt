@@ -19,7 +19,7 @@ import com.example.weatherapp.data.Weather
 import com.example.weatherapp.details.WeatherDetailsFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class TodayWeatherFragment : Fragment() {
+class WeeklyWeatherFragment : Fragment() {
 
     private val forecastRepository = ForecastRepository()
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
@@ -35,7 +35,7 @@ class TodayWeatherFragment : Fragment() {
     ): View? {
 
 
-        val view = inflater.inflate(R.layout.fragment_today_weather, container, false)
+        val view = inflater.inflate(R.layout.fragment_weekly_weather, container, false)
         val zipcode = requireArguments().getString(ZIPCODE_KEY) ?: ""
         tempDisplaySettingManager = TempDisplaySettingManager(requireContext())
 
@@ -69,8 +69,8 @@ class TodayWeatherFragment : Fragment() {
 
     companion object{
         const val ZIPCODE_KEY = "zipcode_key"
-        fun newInstance(zipcode:String) : TodayWeatherFragment{
-            val fragment = TodayWeatherFragment()
+        fun newInstance(zipcode:String) : WeeklyWeatherFragment{
+            val fragment = WeeklyWeatherFragment()
 
             val args = Bundle()
             args.putString(ZIPCODE_KEY, zipcode)
