@@ -1,5 +1,6 @@
 package com.example.weatherapp.forecasting
 
+import ForecastViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,17 +42,24 @@ class TodayWeatherFragment : Fragment() {
         }
         forecastListRecyclerView.adapter = dailyAdapter
 
-        val weeklyForecastObserver = Observer<List<Weather>>{ forecastItems ->
+        /*val weeklyForecastObserver = Observer<List<Weather>>{ forecastItems ->
             dailyAdapter.submitList(forecastItems)
         }
+
         viewModel.weeklyForecast.observe(viewLifecycleOwner, weeklyForecastObserver)
+
+         */
+        val dailyForecastObserver = Observer<List<Weather>>{forecastItems ->
+            dailyAdapter.submitList(forecastItems)
+        }
+        viewModel.dailyForecast.observe(viewLifecycleOwner,dailyForecastObserver)
 
         val locationButton : FloatingActionButton = view.findViewById(R.id.floatingActionButton2)
         locationButton.setOnClickListener{
             showLocationSelection()
         }
 
-        viewModel.loadForecast(zipcode)
+        viewModel.loadDailyForecast(zipcode)
         return view
     }
 

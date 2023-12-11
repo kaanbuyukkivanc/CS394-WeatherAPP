@@ -3,13 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/todayWeatherFragment">
+    app:startDestination="@id/locationSelectionFragment">
 
     <fragment
         android:id="@+id/locationSelectionFragment"
         android:name="com.example.weatherapp.location.LocationSelectionFragment"
         android:label="Location Selection"
-        tools:layout="@layout/fragment_location_selection" />
+        tools:layout="@layout/fragment_location_selection" >
+        <action
+            android:id="@+id/action_locationSelectionFragment_to_todayWeatherFragment2"
+            app:destination="@id/todayWeatherFragment" />
+
+
+    </fragment>
     <fragment
         android:id="@+id/todayWeatherFragment"
         android:name="com.example.weatherapp.forecasting.TodayWeatherFragment"
@@ -21,6 +27,9 @@
         <action
             android:id="@+id/action_todayWeatherFragment_to_weatherDetailsFragment"
             app:destination="@id/weatherDetailsFragment" />
+        <argument
+            android:name="zipcode"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/weatherDetailsFragment"

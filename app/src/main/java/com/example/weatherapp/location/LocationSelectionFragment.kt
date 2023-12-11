@@ -10,15 +10,17 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.weatherapp.R
+import com.example.weatherapp.data.ForecastRepository
+import com.example.weatherapp.forecasting.TodayWeatherFragment
 
 class LocationSelectionFragment : Fragment() {
 
-
+    private val forecastRepository = ForecastRepository()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.fragment_location_selection, container, false)
 
         val zipcodeEditText : EditText = view.findViewById(R.id.zipcodeEditText)
@@ -32,13 +34,32 @@ class LocationSelectionFragment : Fragment() {
                 Toast.makeText(requireContext(), "Enter a valid zipcode number", Toast.LENGTH_SHORT).show()
             }
             else{
-                findNavController().navigateUp()
+                forecastRepository.loadForecastDaily(zipcode)
+                forecastRepository.loadForecastWeekly(zipcode)
+                navigateToWeatherFragment(zipcode)
 
             }
 
         }
 
         return view
+    }
+    private fun navigateToWeatherFragment(zipcode: String) {
+        val action = LocationSelectionFragmentDirections.actionLocationSelectionFragmentToTodayWeatherFragment2(zipcode)
+        findNavController().navigate(action)
+    }
+    companion object{
+        const val ZIPCODE_KEY = "zipcode_key"
+        fun newInstance(zipcode:String) : LocationSelectionFragment {
+            val fragment = LocationSelectionFragment()
+
+            val args = Bundle()
+            args.putString(ZIPCODE_KEY, zipcode)
+            fragment.arguments = args
+
+            return fragment
+        }
+
     }
 
 

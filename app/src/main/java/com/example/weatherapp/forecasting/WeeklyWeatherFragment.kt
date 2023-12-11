@@ -1,6 +1,7 @@
 // WeeklyWeatherFragment.kt
 package com.example.weatherapp.forecasting
 
+import ForecastViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -49,7 +50,7 @@ class WeeklyWeatherFragment : Fragment() {
             showLocationSelection()
         }
 
-        viewModel.loadForecast(zipcode)
+        viewModel.loadWeeklyForecast(zipcode)
 
         return view
     }
