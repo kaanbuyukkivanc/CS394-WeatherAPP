@@ -18,18 +18,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class TodayWeatherFragment : Fragment() {
 
-    private val forecastRepository = ForecastRepository()
+    private lateinit var viewModel: ForecastViewModel
+    //private val forecastRepository = ForecastRepository()
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         val view = inflater.inflate(R.layout.fragment_today_weather, container, false)
-        val zipcode =arguments?.getString(ZIPCODE_KEY) ?: ""
+        val zipcode = arguments?.getString(ZIPCODE_KEY) ?: ""
         tempDisplaySettingManager = TempDisplaySettingManager(requireContext())
+        viewModel = ForecastViewModel()
 
 
         val forecastListRecyclerView : RecyclerView = view.findViewById(R.id.forecastList_recyclerView)
@@ -44,14 +44,14 @@ class TodayWeatherFragment : Fragment() {
         val weeklyForecastObserver = Observer<List<Weather>>{ forecastItems ->
             dailyAdapter.submitList(forecastItems)
         }
-        forecastRepository.weeklyForecast.observe(viewLifecycleOwner, weeklyForecastObserver)
+        viewModel.weeklyForecast.observe(viewLifecycleOwner, weeklyForecastObserver)
 
         val locationButton : FloatingActionButton = view.findViewById(R.id.floatingActionButton2)
         locationButton.setOnClickListener{
             showLocationSelection()
         }
 
-        forecastRepository.loadForecast(zipcode)
+        viewModel.loadForecast(zipcode)
         return view
     }
 

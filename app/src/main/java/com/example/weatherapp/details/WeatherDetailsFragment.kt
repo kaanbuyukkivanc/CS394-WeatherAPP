@@ -10,15 +10,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.R
 import com.example.weatherapp.TempDisplaySettingManager
+import com.example.weatherapp.databinding.FragmentWeatherDetailsBinding
 import com.example.weatherapp.formatTemplateForDisplay
 import com.example.weatherapp.showTempDisplayDialog
 
 class WeatherDetailsFragment : Fragment() {
 
     private val args : WeatherDetailsFragmentArgs by navArgs()
+    private val viewModel = WeatherDetailsViewModel()
+    private var _binding : FragmentWeatherDetailsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
 
     override fun onCreateView(
@@ -26,19 +31,31 @@ class WeatherDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val layout = inflater.inflate(R.layout.fragment_weather_details,container,false)
+        _binding = FragmentWeatherDetailsBinding.inflate(inflater, container, false)
         tempDisplaySettingManager = TempDisplaySettingManager(requireContext())
 
-        val tempText = layout.findViewById<TextView>(R.id.tempText)
-        val descriptionText = layout.findViewById<TextView>(R.id.descriptionDetailsText)
+        binding.tempText.text = formatTemplateForDisplay(args.temp, tempDisplaySettingManager.getTimeDisplaySetting())
+        binding.descriptionDetailsText.text = args.description
 
 
-        tempText.text = formatTemplateForDisplay(args.temp, tempDisplaySettingManager.getTimeDisplaySetting())
-        descriptionText.text = args.description
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewStateObserver = Observer<WeatherDetailsViewState> {
+            viewState ->
+            binding.tempText.text = formatTemplateForDisplay(viewState.temp, tempDisplaySettingManager.getTimeDisplaySetting())
+            binding.descriptionDetailsText.text = viewState.description
+            //binding.dateText = viewState.date
+            //binding.icon.load(viewState.icon)
+        }
+        viewModel.viewState.observe(viewLifecycleOwner,viewStateObserver)
+    }
 
-
-        return layout
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
