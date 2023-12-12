@@ -3,6 +3,7 @@ package com.example.weatherapp.Adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,12 +17,18 @@ import com.example.weatherapp.formatTemplateForDisplay
 
 class DailyWeatherViewHolder(view : View, private val tempDisplaySettingManager: TempDisplaySettingManager) : RecyclerView.ViewHolder(view){
 
-    private val tempText : TextView = view.findViewById(R.id.temperatureText)
-    private val descriptionText : TextView = view.findViewById(R.id.descriptionText)
+    private val tempText : TextView = view.findViewById(R.id.dailyTemp)
+    private val descriptionText : TextView = view.findViewById(R.id.dailyDescription)
+    private val dateText : TextView = view.findViewById(R.id.dailyDate)
+    private val image : ImageView = view.findViewById(R.id.dailyImage)
+
 
     fun bind(weather: Weather){
         tempText.text = formatTemplateForDisplay(weather.temp, tempDisplaySettingManager.getTimeDisplaySetting())
         descriptionText.text = weather.description
+        dateText.text = weather.date
+        image.setImageResource(weather.icon)
+
     }
 }
 class DailyAdapter(

@@ -34,8 +34,11 @@ class WeatherDetailsFragment : Fragment() {
         _binding = FragmentWeatherDetailsBinding.inflate(inflater, container, false)
         tempDisplaySettingManager = TempDisplaySettingManager(requireContext())
 
-        binding.tempText.text = formatTemplateForDisplay(args.temp, tempDisplaySettingManager.getTimeDisplaySetting())
-        binding.descriptionDetailsText.text = args.description
+        binding.tempDetails.text = formatTemplateForDisplay(args.temp, tempDisplaySettingManager.getTimeDisplaySetting())
+        binding.descriptionDetails.text = args.description
+        binding.dateDetailis.text = args.date
+        binding.ImageDetails.setImageResource(args.icon)
+
 
 
         return binding.root
@@ -45,10 +48,11 @@ class WeatherDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val viewStateObserver = Observer<WeatherDetailsViewState> {
             viewState ->
-            binding.tempText.text = formatTemplateForDisplay(viewState.temp, tempDisplaySettingManager.getTimeDisplaySetting())
-            binding.descriptionDetailsText.text = viewState.description
-            //binding.dateText = viewState.date
-            //binding.icon.load(viewState.icon)
+            binding.dateDetailis.text = formatTemplateForDisplay(viewState.temp, tempDisplaySettingManager.getTimeDisplaySetting())
+            binding.descriptionDetails.text = viewState.description
+            binding.dateDetailis.text = viewState.date
+            binding.ImageDetails.setImageResource(viewState.icon)
+
         }
         viewModel.viewState.observe(viewLifecycleOwner,viewStateObserver)
     }

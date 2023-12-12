@@ -60,10 +60,10 @@ class WeeklyWeatherFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun showForecastDetails(forecast: Weather) {
+    private fun showForecastDetails(weather: Weather) {
         val action =
             WeeklyWeatherFragmentDirections.actionWeeklyWeatherFragmentToWeatherDetailsFragment(
-                forecast.temp, forecast.description
+                weather.temp, weather.description, weather.date, weather.icon
             )
         findNavController().navigate(action)
     }

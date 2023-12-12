@@ -6,28 +6,55 @@
     android:id="@+id/activity_weather_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".details.WeatherDetailsFragment">
+    tools:context=".details.WeatherDetailsFragment"
+    android:background="@drawable/background">
 
     <TextView
-        android:id="@+id/tempText"
-        android:layout_width="246dp"
-        android:layout_height="106dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="140dp"
-        android:text="75.4"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:id="@+id/tempDetails"
+        android:layout_width="320dp"
+        android:layout_height="111dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Temperature Here"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        app:layout_constraintEnd_toEndOf="@+id/ImageDetails"
+        app:layout_constraintHorizontal_bias="0.795"
+        app:layout_constraintStart_toStartOf="@+id/ImageDetails"
+        app:layout_constraintTop_toBottomOf="@+id/ImageDetails" />
+
+    <TextView
+        android:id="@+id/descriptionDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Weather Condition Here"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintEnd_toEndOf="@+id/tempDetails"
+        app:layout_constraintStart_toStartOf="@+id/tempDetails"
+        app:layout_constraintTop_toBottomOf="@+id/tempDetails" />
+
+    <ImageView
+        android:id="@+id/ImageDetails"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/baseline_cloud_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionDetailsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/partly_cloudy"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        app:layout_constraintStart_toStartOf="@+id/tempText"
-        app:layout_constraintTop_toBottomOf="@+id/tempText" />
+        android:id="@+id/dateDetailis"
+        android:layout_width="273dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Date Here"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="@+id/descriptionDetails"
+        app:layout_constraintHorizontal_bias="0.449"
+        app:layout_constraintStart_toStartOf="@+id/descriptionDetails"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionDetails" />
 </androidx.constraintlayout.widget.ConstraintLayout>

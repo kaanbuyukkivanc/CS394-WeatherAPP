@@ -12,7 +12,9 @@ class WeatherDetailsViewModel : ViewModel() {
         if(_viewState.value != null) return
         _viewState.value = WeatherDetailsViewState(
             temp = args.temp,
-            description = args.description
+            description = args.description,
+            date = args.date,
+            icon = args.icon
         )
     }
 }

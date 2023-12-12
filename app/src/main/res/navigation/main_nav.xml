@@ -42,6 +42,12 @@
         <argument
             android:name="description"
             app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="icon"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/weeklyWeatherFragment"
