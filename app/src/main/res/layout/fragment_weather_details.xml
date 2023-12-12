@@ -20,7 +20,8 @@
         app:layout_constraintEnd_toEndOf="@+id/ImageDetails"
         app:layout_constraintHorizontal_bias="0.795"
         app:layout_constraintStart_toStartOf="@+id/ImageDetails"
-        app:layout_constraintTop_toBottomOf="@+id/ImageDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/ImageDetails"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/descriptionDetails"
@@ -32,7 +33,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         app:layout_constraintEnd_toEndOf="@+id/tempDetails"
         app:layout_constraintStart_toStartOf="@+id/tempDetails"
-        app:layout_constraintTop_toBottomOf="@+id/tempDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/tempDetails"
+        android:textColor="@color/white"/>
 
     <ImageView
         android:id="@+id/ImageDetails"
@@ -56,5 +58,6 @@
         app:layout_constraintEnd_toEndOf="@+id/descriptionDetails"
         app:layout_constraintHorizontal_bias="0.449"
         app:layout_constraintStart_toStartOf="@+id/descriptionDetails"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionDetails" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionDetails"
+        android:textColor="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

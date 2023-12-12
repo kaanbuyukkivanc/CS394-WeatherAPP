@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weatherapp.R
-import com.example.weatherapp.TempDisplaySetting
 import com.example.weatherapp.TempDisplaySettingManager
 import com.example.weatherapp.data.Weather
 import com.example.weatherapp.formatTemplateForDisplay

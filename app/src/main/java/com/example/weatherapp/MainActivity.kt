@@ -4,12 +4,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import com.example.weatherapp.data.Weather
-import com.example.weatherapp.forecasting.TodayWeatherFragmentDirections
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -47,28 +44,5 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
-    override fun onStart(){
-        super.onStart()
-    }
-
-    override fun onResume(){
-        super.onResume()
-    }
-
-    override fun onPause(){
-        super.onPause()
-    }
-
-    override fun onStop(){
-        super.onStop()
-    }
-
-    override fun onDestroy(){
-        super.onDestroy()
-    }
-
-
 }
 

@@ -1,4 +1,4 @@
-// WeeklyWeatherFragment.kt
+
 package com.example.weatherapp.forecasting
 
 import ForecastViewModel
@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +19,7 @@ import com.example.weatherapp.data.Weather
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class WeeklyWeatherFragment : Fragment() {
-
-    private lateinit var viewModel: ForecastViewModel
+    private val viewModel: ForecastViewModel by activityViewModels()
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
 
     override fun onCreateView(
@@ -28,11 +27,7 @@ class WeeklyWeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_weekly_weather, container, false)
-
-        val zipcode = arguments?.getString(TodayWeatherFragment.ZIPCODE_KEY) ?: ""
         tempDisplaySettingManager = TempDisplaySettingManager(requireContext())
-
-        viewModel = ViewModelProvider(this).get(ForecastViewModel::class.java)
 
         val forecastListRecyclerView: RecyclerView = view.findViewById(R.id.forecastList_recyclerView)
         forecastListRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -50,7 +45,6 @@ class WeeklyWeatherFragment : Fragment() {
             showLocationSelection()
         }
 
-        viewModel.loadWeeklyForecast(zipcode)
 
         return view
     }
@@ -60,25 +54,13 @@ class WeeklyWeatherFragment : Fragment() {
         findNavController().navigate(action)
     }
 
-    private fun showForecastDetails(weather: Weather) {
+    private fun showForecastDetails(forecast: Weather) {
         val action =
             WeeklyWeatherFragmentDirections.actionWeeklyWeatherFragmentToWeatherDetailsFragment(
-                weather.temp, weather.description, weather.date, weather.icon
+                forecast.temp, forecast.description, forecast.date, forecast.icon
             )
         findNavController().navigate(action)
     }
 
-    companion object {
-        const val ZIPCODE_KEY = "zipcode_key"
 
-        fun newInstance(zipcode: String): WeeklyWeatherFragment {
-            val fragment = WeeklyWeatherFragment()
-
-            val args = Bundle()
-            args.putString(ZIPCODE_KEY, zipcode)
-            fragment.arguments = args
-
-            return fragment
-        }
-    }
 }

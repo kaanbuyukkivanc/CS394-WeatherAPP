@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,10 +25,12 @@ class ForecastViewModel : ViewModel() {
         }
     }
 
+    @SuppressLint("NewApi")
     fun loadWeeklyForecast(zipcode: String) {
         forecastRepository.loadForecastWeekly(zipcode)
     }
 
+    @SuppressLint("NewApi")
     fun loadDailyForecast(zipcode: String) {
         forecastRepository.loadForecastDaily(zipcode)
     }
