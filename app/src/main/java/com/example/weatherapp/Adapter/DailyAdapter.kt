@@ -12,14 +12,31 @@ import com.example.weatherapp.R
 import com.example.weatherapp.TempDisplaySettingManager
 import com.example.weatherapp.data.Weather
 import com.example.weatherapp.formatTemplateForDisplay
+import com.example.weatherapp.databinding.ItemDailyWeatherBinding
+import com.example.weatherapp.formatTemplateForDisplay
 
 
-class DailyWeatherViewHolder(view : View, private val tempDisplaySettingManager: TempDisplaySettingManager) : RecyclerView.ViewHolder(view){
+class DailyWeatherViewHolder constructor(
+    private val binding: ItemDailyWeatherBinding,
+    private val tempDisplaySettingManager: TempDisplaySettingManager
+) : RecyclerView.ViewHolder(binding.root) {
 
-    private val tempText : TextView = view.findViewById(R.id.dailyTemp)
-    private val descriptionText : TextView = view.findViewById(R.id.dailyDescription)
-    private val dateText : TextView = view.findViewById(R.id.dailyDate)
-    private val image : ImageView = view.findViewById(R.id.dailyImage)
+    companion object {
+        fun from(parent: ViewGroup, tempDisplaySettingManager: TempDisplaySettingManager): DailyWeatherViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ItemDailyWeatherBinding.inflate(
+                layoutInflater,
+                parent,
+                false
+            )
+            return DailyWeatherViewHolder(binding, tempDisplaySettingManager)
+        }
+    }
+
+    private val tempText : TextView = binding.dailyTemp
+    private val descriptionText : TextView = binding.dailyDescription
+    private val dateText : TextView = binding.dailyDate
+    private val image : ImageView = binding.dailyImage
 
 
     fun bind(weather: Weather){
@@ -51,8 +68,8 @@ class DailyAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyWeatherViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_daily_weather, parent, false)
-        return DailyWeatherViewHolder(itemView, tempDisplaySettingManager)
+        val binding = ItemDailyWeatherBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return DailyWeatherViewHolder(binding, tempDisplaySettingManager)
     }
 
     override fun onBindViewHolder(holder: DailyWeatherViewHolder, position: Int) {

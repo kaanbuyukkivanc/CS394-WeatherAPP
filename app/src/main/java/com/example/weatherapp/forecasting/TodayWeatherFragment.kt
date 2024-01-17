@@ -47,6 +47,9 @@ class TodayWeatherFragment : Fragment() {
         locationButton.setOnClickListener {
             showLocationSelection()
         }
+
+
+
         return view
     }
 

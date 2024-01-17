@@ -40,6 +40,7 @@ class LocationSelectionFragment : Fragment() {
                 Toast.makeText(requireContext(), "Enter a valid zipcode number", Toast.LENGTH_SHORT).show()
             }
             else{
+
                 forecastViewModel.loadDailyForecast(zipcode)
                 forecastViewModel.loadWeeklyForecast(zipcode)
                 navigateToWeatherFragment(zipcode)
