@@ -51,11 +51,11 @@ class DailyAdapter(
     private val tempDisplaySettingManager: TempDisplaySettingManager,
 
     private val clickHandler : (Weather) -> Unit
-) : ListAdapter<Weather, DailyWeatherViewHolder>(DIFF_CONFIG) {
+) : ListAdapter<Weather, DailyWeatherViewHolder>(DiffCallback) {
 
     companion object{
 
-        val DIFF_CONFIG = object: DiffUtil.ItemCallback<Weather>(){
+        val DiffCallback = object: DiffUtil.ItemCallback<Weather>(){
             override fun areItemsTheSame(oldItem: Weather, newItem: Weather): Boolean {
                 return oldItem === newItem
             }
