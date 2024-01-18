@@ -1,63 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_weather_details"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".details.WeatherDetailsFragment"
-    android:background="@drawable/background">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tempDetails"
-        android:layout_width="320dp"
-        android:layout_height="111dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Temperature Here"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-        app:layout_constraintEnd_toEndOf="@+id/ImageDetails"
-        app:layout_constraintHorizontal_bias="0.795"
-        app:layout_constraintStart_toStartOf="@+id/ImageDetails"
-        app:layout_constraintTop_toBottomOf="@+id/ImageDetails"
-        android:textColor="@color/white"/>
+    <data>
+        <variable
+            name="weather"
+            type="com.example.weatherapp.data.Weather" />
+        <variable
+            name="model"
+            type="com.example.weatherapp.details.WeatherDetailsFragment" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <TextView
-        android:id="@+id/descriptionDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Weather Condition Here"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        app:layout_constraintEnd_toEndOf="@+id/tempDetails"
-        app:layout_constraintStart_toStartOf="@+id/tempDetails"
-        app:layout_constraintTop_toBottomOf="@+id/tempDetails"
-        android:textColor="@color/white"/>
+        android:id="@+id/activity_weather_details"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".details.WeatherDetailsFragment">
 
-    <ImageView
-        android:id="@+id/ImageDetails"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/baseline_cloud_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/tempDetails"
+            android:layout_width="320dp"
+            android:layout_height="111dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text = "Temperature Here"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/ImageDetails"
+            app:layout_constraintHorizontal_bias="0.795"
+            app:layout_constraintStart_toStartOf="@+id/ImageDetails"
+            app:layout_constraintTop_toBottomOf="@+id/ImageDetails" />
 
-    <TextView
-        android:id="@+id/dateDetailis"
-        android:layout_width="273dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Date Here"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="@+id/descriptionDetails"
-        app:layout_constraintHorizontal_bias="0.449"
-        app:layout_constraintStart_toStartOf="@+id/descriptionDetails"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionDetails"
-        android:textColor="@color/white"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/descriptionDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@{weather.description}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/tempDetails"
+            app:layout_constraintStart_toStartOf="@+id/tempDetails"
+            app:layout_constraintTop_toBottomOf="@+id/tempDetails" />
+
+        <ImageView
+            android:id="@+id/ImageDetails"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="28dp"
+            app:loadImage="@{weather.icon}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dateDetailis"
+            android:layout_width="273dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="@{weather.date}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/descriptionDetails"
+            app:layout_constraintHorizontal_bias="0.449"
+            app:layout_constraintStart_toStartOf="@+id/descriptionDetails"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionDetails" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
