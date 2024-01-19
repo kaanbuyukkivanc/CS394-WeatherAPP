@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import com.example.weatherapp.R
 import com.example.weatherapp.TempDisplaySettingManager
@@ -19,8 +17,6 @@ class WeatherDetailsFragment : Fragment() {
 
     private val args : WeatherDetailsFragmentArgs by navArgs()
     private val viewModel = WeatherDetailsViewModel()
-    //private var _binding : FragmentWeatherDetailsBinding? = null
-    //private val binding get() = _binding!!
     private lateinit var tempDisplaySettingManager: TempDisplaySettingManager
 
     private lateinit var binding: FragmentWeatherDetailsBinding
@@ -41,26 +37,7 @@ class WeatherDetailsFragment : Fragment() {
     private fun getWeatherFromArgs(): Weather {
         return Weather(args.temp,args.description,args.date,args.icon) // Assuming 'weather' is the correct property in your args class
     }
-/*
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val viewStateObserver = Observer<WeatherDetailsViewState> {
-            viewState ->
 
-            binding.dateDetailis.text = formatTemplateForDisplay(viewState.temp, tempDisplaySettingManager.getTimeDisplaySetting())
-            binding.descriptionDetails.text = viewState.description
-            binding.dateDetailis.text = viewState.date
-            binding.ImageDetails.setImageResource(viewState.icon)
-
-        }
-        viewModel.viewState.observe(viewLifecycleOwner,viewStateObserver)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-*/
 }
 
 

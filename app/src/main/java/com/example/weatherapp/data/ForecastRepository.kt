@@ -6,7 +6,6 @@ import com.example.weatherapp.R
 import com.example.weatherapp.data.Weather
 import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
-import java.util.Date
 
 data class WeatherForecast(
     val temperature: Float = 0.0f,
